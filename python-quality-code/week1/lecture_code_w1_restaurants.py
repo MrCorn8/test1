@@ -106,8 +106,19 @@ def read_restaurants(file):
     - a dict of {price: list of restaurant names}
     - a dict of {cusine: list of restaurant names}
     """
+    file_opened=open(file, 'r')
 
+    lines=file_opened.readlines()
+	
+    counter = 0
     name_to_rating = {}
+
+    while counter<len(lines):
+        name_to_rating[lines[counter].strip()]=int(lines[counter+1][:2])
+        counter=counter+5
+
+    print(name_to_rating)
     price_to_names = {'$': [], '$$': [], '$$$': [], '$$$$': []}
     cuisine_to_names = {}
 
+read_restaurants(FILENAME)
