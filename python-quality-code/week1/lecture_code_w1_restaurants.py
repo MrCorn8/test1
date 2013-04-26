@@ -97,6 +97,21 @@ def filter_by_cuisine(names_matching_price, cuisine_to_names, cuisines_list):
     >>> filter_by_cuisine(names, cuis, cuisines)
     ['Queen St. Cafe', 'Dumplings R Us']
     """
+    #store names that have the cuisines provided
+    possible_names=[]
+    for i in cuisines_list:
+        if i in cuisine_to_names:
+            for j in cuisine_to_names[i]:
+                possible_names.append(j)
+
+    #match the names that match price with the names that serve the cuisines provided
+    final_names=[]
+    for i in possible_names:
+         if i in names_matching_price:
+             final_names.append(i)
+
+    return final_names
+
 
 def read_restaurants(file):
     """ (file) -> (dict, dict, dict)
@@ -134,4 +149,12 @@ def read_restaurants(file):
 
     return name_to_rating, price_to_names, cuisine_to_names
 
-read_restaurants(FILENAME)
+#P R U E B A S 
+#read_restaurants(FILENAME)
+name_to_rating, price_to_names, cuisine_to_names = read_restaurants(FILENAME)
+#    print(name_to_rating,end="\n\n")
+#    print(price_to_names,end="\n\n")
+#    print(cuisine_to_names,end="\n\n")
+names_matching_price = price_to_names['$']
+result=filter_by_cuisine(names_matching_price, cuisine_to_names, ['Chinese', 'Thai'])
+print(result)
