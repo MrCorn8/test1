@@ -36,6 +36,7 @@ would produce this list:
 
 # The file containing the restaurant data.
 FILENAME = 'restaurants_small.txt'
+#FILENAME = 'lecture_code_w1_restaurants.txt'
 
 
 def recommend(file, price, cuisines_list):
@@ -109,16 +110,28 @@ def read_restaurants(file):
     file_opened=open(file, 'r')
 
     lines=file_opened.readlines()
+    file_opened.close()
 	
     counter = 0
     name_to_rating = {}
+    price_to_names = {'$': [], '$$': [], '$$$': [], '$$$$': []}
+    cuisine_to_names = {}
 
     while counter<len(lines):
         name_to_rating[lines[counter].strip()]=int(lines[counter+1][:2])
+        price_to_names[lines[counter+2].strip()].append(lines[counter].strip())
+
+        cuisine_list=lines[counter+3].strip().split(',')
+        for cuisine in cuisine_list:
+            if cuisine not in cuisine_to_names:
+                cuisine_to_names[cuisine]=[]
+            cuisine_to_names[cuisine].append(lines[counter].strip())
         counter=counter+5
 
-    print(name_to_rating)
-    price_to_names = {'$': [], '$$': [], '$$$': [], '$$$$': []}
-    cuisine_to_names = {}
+#    print(name_to_rating,end="\n\n")
+#    print(price_to_names,end="\n\n")
+#    print(cuisine_to_names,end="\n\n")
+
+    return name_to_rating, price_to_names, cuisine_to_names
 
 read_restaurants(FILENAME)
