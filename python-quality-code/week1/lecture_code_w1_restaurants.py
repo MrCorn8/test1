@@ -35,8 +35,8 @@ would produce this list:
 """
 
 # The file containing the restaurant data.
-FILENAME = 'restaurants_small.txt'
-#FILENAME = 'lecture_code_w1_restaurants.txt'
+#FILENAME = 'restaurants_small.txt'
+FILENAME = 'lecture_code_w1_restaurants.txt'
 
 
 def recommend(file, price, cuisines_list):
@@ -82,6 +82,13 @@ def build_rating_list(name_to_rating, names_final):
     >>> names = ['Queen St. Cafe', 'Dumplings R Us']
     [[82, 'Queen St. Cafe'], [71, 'Dumplings R Us']]
     """
+    #Look for the name and write it to the list with the rate (first the rate)
+    final_list=[]
+    for i in names_final:
+        final_list.append([name_to_rating[i],i])
+
+    final_list.sort()
+    return final_list
 
 def filter_by_cuisine(names_matching_price, cuisine_to_names, cuisines_list):
     """ (list of str, dict of {str: list of str}, list of str) -> list of str
@@ -151,10 +158,13 @@ def read_restaurants(file):
 
 #P R U E B A S 
 #read_restaurants(FILENAME)
-name_to_rating, price_to_names, cuisine_to_names = read_restaurants(FILENAME)
+#name_to_rating, price_to_names, cuisine_to_names = read_restaurants(FILENAME)
 #    print(name_to_rating,end="\n\n")
 #    print(price_to_names,end="\n\n")
 #    print(cuisine_to_names,end="\n\n")
-names_matching_price = price_to_names['$']
-result=filter_by_cuisine(names_matching_price, cuisine_to_names, ['Chinese', 'Thai'])
-print(result)
+#names_matching_price = price_to_names['$']
+#result=filter_by_cuisine(names_matching_price, cuisine_to_names, ['Chinese', 'Thai'])
+#final=build_rating_list(name_to_rating, result)
+#print(final)
+
+print(recommend(FILENAME, '$$', ["Mexican","Thai","Italian","Japanese"]))
