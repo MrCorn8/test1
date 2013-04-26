@@ -150,21 +150,8 @@ def read_restaurants(file):
             cuisine_to_names[cuisine].append(lines[counter].strip())
         counter=counter+5
 
-#    print(name_to_rating,end="\n\n")
-#    print(price_to_names,end="\n\n")
-#    print(cuisine_to_names,end="\n\n")
 
     return name_to_rating, price_to_names, cuisine_to_names
 
-#P R U E B A S 
-#read_restaurants(FILENAME)
-#name_to_rating, price_to_names, cuisine_to_names = read_restaurants(FILENAME)
-#    print(name_to_rating,end="\n\n")
-#    print(price_to_names,end="\n\n")
-#    print(cuisine_to_names,end="\n\n")
-#names_matching_price = price_to_names['$']
-#result=filter_by_cuisine(names_matching_price, cuisine_to_names, ['Chinese', 'Thai'])
-#final=build_rating_list(name_to_rating, result)
-#print(final)
 
 print(recommend(FILENAME, '$$', ["Mexican","Thai","Italian","Japanese"]))
