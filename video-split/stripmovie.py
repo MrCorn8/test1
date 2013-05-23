@@ -1,20 +1,23 @@
 import timedifference
+import os
 
 #Read file
 file=open("movie.txt",'r')
 data=file.readlines()
 
-#first line is the video bitrate, second line is the audio bitrate
+#first line is the name of the file
 filename=data[0].strip()
 changefilename=filename.split(".")
 newfilename=changefilename[0]+".mp4"
-#print(newfilename)
+
+#second line is the video bitrate, third line is the audio bitrate
 vbitrate=data[1].strip()
 abitrate=data[2].strip()
 
 #print(vbitrate)
 #print(abitrate)
-#last lines are the list of times for the stripping
+#last lines are the list of times for the stripping, make the list of commands
+commandlist=[]
 for i in range(3,len(data)):
 	times=data[i].strip().split(",")
 #	print("times")
@@ -25,6 +28,11 @@ for i in range(3,len(data)):
 
 #	print("offset= "+str(offset))
 #	print("duration= "+str(duration))
-	print("avconv -ss "+str(offset)+" -i "+str(filename)+" -t "+str(duration)+" -acodec libmp3lame -b:a "+str(abitrate)+"k -b:v "+str(vbitrate)+"k "+outputname)
+	#print("avconv -ss "+str(offset)+" -i \""+str(filename)+"\" -t "+str(duration)+" -acodec libmp3lame -b:a "+str(abitrate)+"k -b:v "+str(vbitrate)+"k \""+outputname+"\"")
+	commandlist.append("avconv -ss "+str(offset)+" -i \""+str(filename)+"\" -t "+str(duration)+" -acodec libmp3lame -b:a "+str(abitrate)+"k -b:v "+str(vbitrate)+"k \""+outputname+"\"")
 
-#iterate over the list of times, write the commands for the stripping
+print(commandlist)
+
+#iterate over the list of commands
+for command in commandlist:
+	os.system(command)
