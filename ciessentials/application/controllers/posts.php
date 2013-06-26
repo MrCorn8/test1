@@ -22,7 +22,9 @@ class Posts extends CI_Controller {
 		$data['last_count']=$this->post->get_posts_count();
 		$data['comment']='This was done in the method index';
 
+		$this->load->view('header');
 		$this->load->view('post_index', $data);
+		$this->load->view('footer');
 	}
 
 	function post($postID)
@@ -31,8 +33,31 @@ class Posts extends CI_Controller {
 		$this->load->view('post', $data);
 	}
 
+	function correct_permissions($required)
+	{
+		$user_type=$this->session->userdata('user_type');
+
+		if ($required=="user") {
+			if ($user_type) {
+				return true;
+			}
+		}elseif ($required=="author") {
+			if ($user_type=="admin" || $user_type=="author") {
+				return true;
+			}
+		}elseif ($required=="admin") {
+			if ($user_type=="admin") {
+				return true;
+			}
+		}
+	}
+
 	function new_post()
 	{
+		if (!$this->correct_permissions("author")) {
+			redirect(base_url().'users/login');
+
+		}
 		if ($_POST) {
 			$data = array('title' => $_POST['title'] , 
 				'post'=> $_POST['post'],
@@ -48,6 +73,9 @@ class Posts extends CI_Controller {
 
 	function editpost($postID)
 	{
+		if (!$this->correct_permissions("author")) {
+			redirect(base_url().'users/login');
+		}
 		$data['success']=0;
 		if ($_POST) {
 			$data_post = array('title' => $_POST['title'] ,
@@ -64,6 +92,10 @@ class Posts extends CI_Controller {
 
 	function deletepost($postID)
 	{
+		if (!$this->correct_permissions("author")) {
+			redirect(base_url().'users/login');
+
+		}
 		$this->post->delete_post($postID);
 		redirect(base_url());
 	}

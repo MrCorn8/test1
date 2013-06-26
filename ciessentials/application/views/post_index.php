@@ -1,16 +1,7 @@
-<!--<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Posts</title>
-</head>
-<body>
-	<div class="wrapper">
-		<h1>My Blog</h1>
-		<div class="container">-->
 			<?php if ($this->session->userdata('userID')) {?>
 				<p>You are logged in!!</p>
 				<p><a href="<?=base_url() ?>users/logout">Logout</a></p>
+				<p>User Type: <?=$this->session->userdata('user_type'); ?></p>
 			<?php } else { ?>
 				<p><a href="<?=base_url() ?>users/login">Login</a></p>
 			<? }
@@ -33,12 +24,5 @@
 			}
 			?>
 			<br>
-<!--			<?php echo 'This is the last count '.$last_count ?>
-			<?php echo $comment ?>-->
 			<?=$pages ?>
 			<br><br>
-<!--		</div>
-	</div>
-
-</body>
-</html>-->
