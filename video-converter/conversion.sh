@@ -23,8 +23,15 @@ do
 	nombre_nuevo="$nombre_sin_extension.mp4"
 	sleep 1
 	
+	#THIS COMMAND REDUCES THE SIZE OF THE MOVIES FILMED WITH MY CAMERA CANON
+	#avconv -i "$nombre_original" -b:a 96k -acodec libmp3lame -b:v 5000k -ar 44100  videos/"$nombre_nuevo"
+	avconv -i "$nombre_original" -b:a 96k -acodec libfaac -vcodec libx264 -b:v 5000k -ar 44100 -aspect 4:3  videos/"$nombre_nuevo"
+
 	#THIS COMMAND WORKS FINE FOR MY GALAXY ACE.
-	avconv -i "$nombre_original" -b:a 64k -acodec libmp3lame -b:v 300k -ar 44100 -s 480x270 -r 25 videos/"$nombre_nuevo"
+	#avconv -i "$nombre_original" -b:a 64k -acodec libmp3lame -b:v 300k -ar 44100 -s 480x270 -r 25 videos/"$nombre_nuevo"
+
+	#THIS COMMAND WORKS FINE FOR MY TABLET IVIEW 7"
+	#avconv -i "$nombre_original" -b:a 64k -acodec libmp3lame -b:v 600k -ar 44100 -s 640x400 -r 25 videos/"$nombre_nuevo"
 
 	#THIS COMMAND USES THE VIDEO PRODUCED BY MELT AND PREPARE IT FOR YOUTUBE
 	#avconv -i "$nombre_original" -b:a 128k -acodec libfaac -vcodec libx264 -b:v 1500k -ar 44100 -aspect 4:3 -deinterlace videos/"$nombre_nuevo"
