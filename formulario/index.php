@@ -27,6 +27,9 @@
                  $error    = ''; // error message
                  $name     = ''; // sender's name
                  $email    = ''; // sender's email address
+                 $telefono = ''; // sender's phone number
+                 $area = '';     // sender's working area
+                 $funcion = '';  // sender's working function
                  $subject  = ''; // subject
                  $message  = ''; // the message itself
 
@@ -35,14 +38,17 @@
                  $name     = $_POST['name'];
                  $email    = $_POST['email'];
                  //$subject  = $_POST['subject'];
-                 $subject  = "Información requerida desde su pagina web";
+                 $subject  = "Informacion requerida desde su pagina web";
+                 $telefono = $_POST['telefono'];
+                 $area = $_POST['area'];
+                 $funcion = $_POST['funcion'];
                  $message  = $_POST['message'];
 
                 if(trim($name) == '')
                 {
                     $error = '<div class="errormsg">Por favor escriba su nombre!</div>';
                 }
-            	    else if(trim($email) == '')
+            	else if(trim($email) == '')
                 {
                     $error = '<div class="errormsg">Por favor indique su direccion Email!</div>';
                 }
@@ -53,6 +59,10 @@
                 else if(trim($subject) == '')
                 {
                     $error = '<div class="errormsg">Indique el asunto del mensaje!</div>';
+                }
+                else if(trim($telefono) == '')
+                {
+                    $error = '<div class="errormsg">Escriba su número telefónico!</div>';
                 }
             	else if(trim($message) == '')
                 {
@@ -76,7 +86,7 @@
 //                    $subject = '[Contacto web] : ' . $subject;
 
                     // the mail message ( add any additional information if you want )
-                    $msg     = "De : $name \r\nCorreo : $email \r\nAsunto : $subject \r\n\n" . "Mensaje : \r\n$message";
+                    $msg     = "De : $name \r\nCorreo : $email \r\nAsunto : $subject \r\nArea de desempeño: $area\r\nFuncion: $funcion\r\n\n" . "Mensaje : \r\n$message";
 
                     mail($to, $subject, $msg, "From: $email\r\nReply-To: $email\r\nReturn-Path: $email\r\n");
             ?>
@@ -104,13 +114,34 @@
             <form  method="post" name="contFrm" id="contFrm" action="">
 
 
-                      <label><span class="required">*</span> Nombre:</label>
+                      <label><span class="required">*</span> Su nombre:</label>
             			<input name="name" type="text" class="box" id="name" size="50" value="<?=$name;?>" />
 
-            			<label><span class="required">*</span> Email: </label>
+            			<label><span class="required">*</span> Su correo electrónico: </label>
             			<input name="email" type="text" class="box" id="email" size="50" value="<?=$email;?>" />
 
-                 		<label><span class="required">*</span> Mensaje: </label>
+                        <label><span class="required">*</span> Teléfono: </label>
+                        <input name="telefono" type="text" class="box" id="telefono" size="50" value="<?=$telefono;?>" />
+
+                        <label><span class="required">*</span> ¿Cuál es su área de desempeño? </label>
+                        <select name="area" id="area">
+                            <option value="Nivel basico" selected>Nivel básico</option>
+                            <option value="Nivel medio">Nivel medio</option>
+                            <option value="Medio superior">Medio superior</option>
+                            <option value="Superior">Superior</option>
+                        </select>
+
+                        <div>&nbsp;</div>
+
+                        <label><span class="required">*</span> Indique su función. </label>
+                        <select name="funcion" id="funcion">
+                            <option value="Supervisor" selected>Supervisor</option>
+                            <option value="Administrativo">Administrativo</option>
+                            <option value="Tecnico">Técnico</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+
+                 		<label><span class="required">*</span> Describa su petición: </label>
                  		<textarea name="message" cols="50" rows="6"  id="message"><?=$message;?></textarea>
 
             			<!-- Submit Button-->
