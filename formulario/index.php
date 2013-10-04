@@ -10,8 +10,8 @@
 |____________________________________________________________|
 -->
 <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-       <title> HEALTHLIFE</title>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+       <title> Formulario de contacto</title>
        
        <!-- the cascading style sheet-->
        <link href="style.css" rel="stylesheet" type="text/css" />
@@ -29,7 +29,6 @@
                  $email    = ''; // sender's email address
                  $subject  = ''; // subject
                  $message  = ''; // the message itself
-               	 //$spamcheck = ''; // Spam check
 
             if(isset($_POST['send']))
             {
@@ -38,7 +37,6 @@
                  //$subject  = $_POST['subject'];
                  $subject  = "Información requerida desde su pagina web";
                  $message  = $_POST['message'];
-               	 //$spamcheck = $_POST['spamcheck'];
 
                 if(trim($name) == '')
                 {
@@ -46,13 +44,13 @@
                 }
             	    else if(trim($email) == '')
                 {
-                    $error = '<div class="errormsg">POr favor indique su direccion Email!</div>';
+                    $error = '<div class="errormsg">Por favor indique su direccion Email!</div>';
                 }
                 else if(!isEmail($email))
                 {
                     $error = '<div class="errormsg">Su Email no es valido, por favor intente de nuevo!!</div>';
                 }
-            	    if(trim($subject) == '')
+                else if(trim($subject) == '')
                 {
                     $error = '<div class="errormsg">Indique el asunto del mensaje!</div>';
                 }
