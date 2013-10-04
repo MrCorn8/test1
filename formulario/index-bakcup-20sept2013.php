@@ -11,7 +11,7 @@
 -->
 <head>
        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-       <title> HEALTHLIFE</title>
+       <title>Hocker Soluciones y Servicios</title>
        
        <!-- the cascading style sheet-->
        <link href="style.css" rel="stylesheet" type="text/css" />
@@ -29,16 +29,15 @@
                  $email    = ''; // sender's email address
                  $subject  = ''; // subject
                  $message  = ''; // the message itself
-               	 //$spamcheck = ''; // Spam check
+               	 $spamcheck = ''; // Spam check
 
             if(isset($_POST['send']))
             {
                  $name     = $_POST['name'];
                  $email    = $_POST['email'];
-                 //$subject  = $_POST['subject'];
-                 $subject  = "Información requerida desde su pagina web";
+                 $subject  = $_POST['subject'];
                  $message  = $_POST['message'];
-               	 //$spamcheck = $_POST['spamcheck'];
+               	 $spamcheck = $_POST['spamcheck'];
 
                 if(trim($name) == '')
                 {
@@ -60,6 +59,14 @@
                 {
                     $error = '<div class="errormsg">Escriba su mensaje!</div>';
                 }
+	          	else if(trim($spamcheck) == '')
+	            {
+	            	$error = '<div class="errormsg">REalice la suma para controlar el Spam!</div>';
+	            }
+	          	else if(trim($spamcheck) != '5')
+	            {
+	            	$error = '<div class="errormsg">Control Spam: El resultado de la suma no es correcta! 2 + 3 = ???</div>';
+	            }
                 if($error == '')
                 {
                     if(get_magic_quotes_gpc())
@@ -69,24 +76,24 @@
 
                     // the email will be sent here
                     // make sure to change this to be your e-mail
-                    $to      = "es_cuamatzi@yahoo.com.mx";
+                    $to      = "hockersands@gmail.com";
 
                     // the email subject
                     // '[Contact Form] :' will appear automatically in the subject.
                     // You can change it as you want
 
-//                    $subject = '[Contacto web] : ' . $subject;
+                    $subject = '[Contacto web] : ' . $subject;
 
                     // the mail message ( add any additional information if you want )
-                    $msg     = "De : $name \r\nCorreo : $email \r\nAsunto : $subject \r\n\n" . "Mensaje : \r\n$message";
+                    $msg     = "From : $name \r\ne-Mail : $email \r\nSubject : $subject \r\n\n" . "Message : \r\n$message";
 
                     mail($to, $subject, $msg, "From: $email\r\nReply-To: $email\r\nReturn-Path: $email\r\n");
             ?>
 
                   <!-- Message sent! (change the text below as you wish)-->
                   <div style="text-align:center;">
-                    <h1>Mensaje enviado.</h1>
-                       <p>Gracias por escribirnos <b><?=$name;?></b>, le responderemos lo antes posible!</p>
+                    <h1>Enviado</h1>
+                       <p>Gracias <b><?=$name;?></b>, le responderemos lo antes posible!</p>
                   </div>
                   <!--End Message Sent-->
 
@@ -99,8 +106,9 @@
             {
             ?>
 
-            <h1> Formulario de contacto.</h1>
-                <!--Error Message-->
+            <h1> Solicitar un presupuesto:</h1>
+            <p><img src="../../../../../../formulario/logo_hocker2.png" width="160" height="160" /></p>
+            <!--Error Message-->
             <?=$error;?>
 
             <form  method="post" name="contFrm" id="contFrm" action="">
@@ -112,8 +120,14 @@
             			<label><span class="required">*</span> Email: </label>
             			<input name="email" type="text" class="box" id="email" size="50" value="<?=$email;?>" />
 
+            			<label><span class="required">*</span> Asunto: </label>
+            			<input name="subject" type="text" class="box" id="subject" size="50" value="<?=$subject;?>" />
+
                  		<label><span class="required">*</span> Mensaje: </label>
                  		<textarea name="message" cols="50" rows="6"  id="message"><?=$message;?></textarea>
+
+            			<label><span class="required">*</span> Control spam: <b>2 + 3=</b></label>
+						<input name="spamcheck" type="text" class="box" id="spamcheck" size="4" value="<?=$spamcheck;?>" /><br /><br />
 
             			<!-- Submit Button-->
                  		<input name="send" type="submit" class="button" id="send" value="" />
@@ -132,6 +146,7 @@
             ?>
             <!-- END CONTACT FORM -->
 
+            <p align="center"><a href="http://www.hockersands.com" target="_blank">Hocker Soluciones y servicios</a></p>
             
      
 </div> <!-- /contentForm -->

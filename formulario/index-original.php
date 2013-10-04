@@ -11,16 +11,23 @@
 -->
 <head>
        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
-       <title> HEALTHLIFE</title>
+       <title>.::YVES ROCHER INSCRIBETE::.</title>
        
        <!-- the cascading style sheet-->
        <link href="style.css" rel="stylesheet" type="text/css" />
        
+       <style type="text/css">
+<!--
+.style3 {font-family: Tahoma; font-size: 100%;}
+.style4 {font-family: Tahoma}
+.style6 {font-family: Tahoma; font-size: 100%; font-weight: bold; }
+-->
+       </style>
 </head>
   
 
 <body>
-     <div id="contentForm">
+<div id="contentForm">
 
             <!-- The contact form starts from here-->
             <?php
@@ -29,16 +36,15 @@
                  $email    = ''; // sender's email address
                  $subject  = ''; // subject
                  $message  = ''; // the message itself
-               	 //$spamcheck = ''; // Spam check
+               
 
             if(isset($_POST['send']))
             {
                  $name     = $_POST['name'];
                  $email    = $_POST['email'];
-                 //$subject  = $_POST['subject'];
-                 $subject  = "InformaciĂłn requerida desde su pagina web";
+                 $subject  = $_POST['subject'];
                  $message  = $_POST['message'];
-               	 //$spamcheck = $_POST['spamcheck'];
+               	 
 
                 if(trim($name) == '')
                 {
@@ -67,28 +73,28 @@
                         $message = stripslashes($message);
                     }
 
-                    // the email will be sent here
-                    // make sure to change this to be your e-mail
-                    $to      = "es_cuamatzi@yahoo.com.mx";
+                    // el mensaje será enviado aqui
+                    // asegúrese de cambiar esto es su dirección de e-mail
+                    $to      = "manosquecuran2013@hotmail.com";
 
-                    // the email subject
-                    // '[Contact Form] :' will appear automatically in the subject.
-                    // You can change it as you want
+                    // el asunto del correo electrónico
+                    // '[Contact Form] :' aparecerá automáticamente en el tema
+                    // Puede cambiarlo como quieras
 
-//                    $subject = '[Contacto web] : ' . $subject;
+                    $subject = '[Contacto web] : ' . $subject;
 
-                    // the mail message ( add any additional information if you want )
+                    // el mensaje de correo (agregue cualquier información adicional si lo desea )
                     $msg     = "De : $name \r\nCorreo : $email \r\nAsunto : $subject \r\n\n" . "Mensaje : \r\n$message";
 
                     mail($to, $subject, $msg, "From: $email\r\nReply-To: $email\r\nReturn-Path: $email\r\n");
             ?>
 
-                  <!-- Message sent! (change the text below as you wish)-->
+                  <!-- Mensaje enviado! (cambiar el texto que sigue a su gusto)-->
                   <div style="text-align:center;">
-                    <h1>Mensaje enviado.</h1>
-                       <p>Gracias por escribirnos <b><?=$name;?></b>, le responderemos lo antes posible!</p>
+                    <h1 class="msgSent">Enviado</h1>
+                       <p><span class="style4">Gracias</span> <b><?=$name;?></b>, <span class="style4">le responderemos lo antes posible.</span></p>
                   </div>
-                  <!--End Message Sent-->
+                  <!--Fin mensaje enviado-->
 
 
             <?php
@@ -99,10 +105,12 @@
             {
             ?>
 
-            <h1> Formulario de contacto.</h1>
-                <!--Error Message-->
-            <?=$error;?>
-
+       <h1 align="center" class="style3">&nbsp;</h1>
+            <h1 class="style3"><img src="images/header.jpg" width="650" height="678" /></h1>
+  <p align="left">
+              <!--Error Message-->
+              <?=$error;?>
+  </p>
             <form  method="post" name="contFrm" id="contFrm" action="">
 
 
@@ -112,16 +120,23 @@
             			<label><span class="required">*</span> Email: </label>
             			<input name="email" type="text" class="box" id="email" size="50" value="<?=$email;?>" />
 
+            			<label><span class="required">*</span> Asunto: </label>
+            			<input name="subject" type="text" class="box" id="subject" size="50" value="<?=$subject;?>" />
+
                  		<label><span class="required">*</span> Mensaje: </label>
                  		<textarea name="message" cols="50" rows="6"  id="message"><?=$message;?></textarea>
 
+            		
+            			<br />
+
             			<!-- Submit Button-->
-                 		<input name="send" type="submit" class="button" id="send" value="" />
+                 		 <input name="send" type="submit" class="button" id="send" value="" />
 
             </form>
 
-            <!-- E-mail verification. Do not edit -->
-            <?php
+            <p>
+              <!-- E-mail verification. Do not edit -->
+              <?php
             }
 
             function isEmail($email)
@@ -130,11 +145,11 @@
                         ,$email));
             }
             ?>
-            <!-- END CONTACT FORM -->
-
-            
-     
-</div> <!-- /contentForm -->
+              <!-- END CONTACT FORM --> 
+ </p>
+            <p align="right">             <a href="http://www.yvesrochermexico-inscribete.com.mx" target="_blank" class="style6">www.yvesrochermexico-inscribete.com.mx</a></p>
+</div>
+     <!-- /contentForm -->
      
 </body>
 </html>
