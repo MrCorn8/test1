@@ -59,14 +59,6 @@
                 {
                     $error = '<div class="errormsg">Escriba su mensaje!</div>';
                 }
-	          	else if(trim($spamcheck) == '')
-	            {
-	            	$error = '<div class="errormsg">REalice la suma para controlar el Spam!</div>';
-	            }
-	          	else if(trim($spamcheck) != '5')
-	            {
-	            	$error = '<div class="errormsg">Control Spam: El resultado de la suma no es correcta! 2 + 3 = ???</div>';
-	            }
                 if($error == '')
                 {
                     if(get_magic_quotes_gpc())
@@ -125,8 +117,6 @@
                  		<label><span class="required">*</span> Mensaje: </label>
                  		<textarea name="message" cols="50" rows="6"  id="message"><?=$message;?></textarea>
 
-            			<label><span class="required">*</span> Control spam: <b>2 + 3=</b></label>
-						<input name="spamcheck" type="text" class="box" id="spamcheck" size="4" value="<?=$spamcheck;?>" /><br /><br />
 
             			<!-- Submit Button-->
                  		<input name="send" type="submit" class="button" id="send" value="" />
