@@ -106,8 +106,7 @@
             {
             ?>
 
-            <h1> Solicitar un presupuesto:</h1>
-            <p><img src="../../../../../../formulario/logo_hocker2.png" width="160" height="160" /></p>
+            <h1> FORMULARIO DE CONTACTO</h1>
             <!--Error Message-->
             <?=$error;?>
 
@@ -146,7 +145,6 @@
             ?>
             <!-- END CONTACT FORM -->
 
-            <p align="center"><a href="http://www.hockersands.com" target="_blank">Hocker Soluciones y servicios</a></p>
             
      
 </div> <!-- /contentForm -->
